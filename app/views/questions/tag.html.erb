@@ -1,0 +1,7 @@
+<% provide(:title, 'All Questions') %>
+<% if current_user.try(:admin?) %>
+  <%= link_to "Add new question", "/questions/new", class: "btn btn-medium btn-primary" %>
+<% end %>
+<h1>All questions</h1>
+
+<%= render "index" %>

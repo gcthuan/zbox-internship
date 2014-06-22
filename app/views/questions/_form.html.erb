@@ -1,0 +1,42 @@
+<% if @question.errors.any? %>
+  <ul>
+    <%= @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :tag_list, "Tags" %>
+    <%= f.text_field :tag_list %>
+  </div>
+  <div>
+    <%= f.label :difficulty %>
+  </div>
+  <div>
+    <%= f.radio_button :difficulty, "Easy", :checked => true %>
+    Easy
+  </div>
+  <div>
+    <%= f.radio_button :difficulty, "Medium" %>
+    Medium
+  </div>
+  <div>
+    <%= f.radio_button :difficulty, "Hard" %>
+    Hard
+  </div>
+  <div>
+    <%= f.label :body %>
+  </div>
+  <div>
+    <%= f.cktext_area :body, rows: 10 %>
+  </div>
+</br>
+  <div>
+    <%= f.submit "Submit", class: "btn btn-medium btn-primary" %>
+  </div>
+<% end %>

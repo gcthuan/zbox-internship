@@ -1,0 +1,24 @@
+<% provide(:title, 'All Packages') %>
+<% if current_user.try(:admin?) %>
+  <%= link_to "Add new package", "/packages/new", class: "btn btn-medium btn-primary" %>
+<% end %>
+<h1>All packages</h1>
+
+<%= will_paginate %>
+
+<table class="table table-hover">
+  <tr>
+  	<th>Id</th>
+  	<th>Name</th>
+  	<th>Number of Questions</th>
+  </tr>
+  <% @packages.each do |package| %>
+  <tr>
+  	<td><%= package.id %></td>
+  	<td><%= link_to package.name, controller: "packages", action: "show", id: package %></td>
+  	<td><%= package.questions.count %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= will_paginate %>
