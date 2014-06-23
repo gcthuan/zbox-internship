@@ -10,6 +10,7 @@ gem 'ckeditor'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
+gem 'figaro'
 
 group :development, :test do
   gem 'spork-rails', '4.0.0'

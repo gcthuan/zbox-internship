@@ -1,6 +1,22 @@
 <% provide(:title, @user.username) %>
-<h1><%= @user.username %></h1>
-<body>
+<h1><%= @user.username %>
+<%= link_to "Send", { controller: "users", action: "mail", id: @user }, class: "btn btn-large btn-primary inline" %>
+</h1>
+<table class="table table-hover">
+  <tr>
+    <th>Id</th>
+    <th>Package Name</th>
+    <th>Number of Question(s)</th>
+  </tr>
+  <% @user.packages.each do |package| %>
+  <tr>
+    <td><%= package.id %></td>
+    <td><%= link_to package.name, controller: "packages", action: "show", id: package %></td>
+    <td><%= package.questions.count %></td>
+  </tr>
+  <% end %>
+</table>
+
 <p>
   <% if current_user.try(:admin?) %>
     <%= form_tag("/users/add_package", :method=>"post") do %>
@@ -14,8 +30,3 @@
   <% end %>
 <% end %>
 </p>
-
-<p>
-	<%= link_to "Send", controller: "users", action: "mail", id: @user %>
-</p>
-</body>
