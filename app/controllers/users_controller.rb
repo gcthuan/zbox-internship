@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       redirect_to '/users/index'
     else
       flash[:error] = "You do not have right to access this function."
-      render '/users/index'
+      redirect_to '/users/index'
     end
   end
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       # Sign in the user by passing validation in case his password changed
       sign_in @user, :bypass => true
-      render root_path
+      redirect_to root_path
     else
       render "edit"
     end
