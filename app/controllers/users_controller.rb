@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   def add_package
     if current_user.try(:admin?)
       @user = User.find($current_id)
-      @package = Package.find(params[:package_id])
+      @package = Package.find_by_name(params[:package_name])
       if @package.valid?
         @user.packages << @package
       end
