@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   	  @question = Question.new
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      render '/questions/index'
     end
   end
 
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
       end
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      render '/questions/index'
     end
   end
 
@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
       @question= Question.find(params[:id])
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      render '/questions/index'
     end
   end
 
@@ -46,13 +46,13 @@ class QuestionsController < ApplicationController
       @question = Question.find(params[:id])
       if @question.update_attributes(question_params)
         flash[:success] = "The question has been successfully updated."
-        redirect_to '/questions/index'
+        render '/questions/index'
       else
         render action: "edit"
       end
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      render '/questions/index'
     end
   end
 

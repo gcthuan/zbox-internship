@@ -13,11 +13,8 @@ DeviseTest::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  config.serve_static_assets = false
-
-
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   #config.active_support.deprecation = :log
@@ -30,4 +27,14 @@ DeviseTest::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+:address => "smtp.gmail.com",
+:port => 587,
+:domain => "gmail.com",
+:user_name => "gcthuan@apcs.vn",
+:password => "altair011712",
+:authentication => "plain",
+:enable_starttls_auto => true
+}
 end

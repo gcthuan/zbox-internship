@@ -5,7 +5,7 @@ class PackagesController < ApplicationController
       @package = Package.new
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to :action => 'index'
+      render :action => 'index'
     end
   end
 
@@ -29,7 +29,7 @@ class PackagesController < ApplicationController
       end
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to :action => 'index'
+      render :action => 'index'
     end
   end
 

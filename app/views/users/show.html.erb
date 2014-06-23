@@ -1,5 +1,21 @@
-<% provide(:title, @user.email) %>
-<h1><%= @user.email %></h1>
+<% provide(:title, @user.username) %>
+<h1><%= @user.username %></h1>
+<body>
+<p>
+  <% if current_user.try(:admin?) %>
+    <%= form_tag("/users/add_package", :method=>"post") do %>
+    <div class="field">
+    <%= text_field_tag(:package_id) %>
+    </div>
+</br>
+    <div class="field">
+    <%= submit_tag("Add Package", class: "btn btn-medium btn-primary") %>
+    </div>
+  <% end %>
+<% end %>
+</p>
+
 <p>
 	<%= link_to "Send", controller: "users", action: "mail", id: @user %>
 </p>
+</body>

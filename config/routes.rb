@@ -8,6 +8,7 @@ DeviseTest::Application.routes.draw do
   
   match '/users/index', to: 'users#index',  via: 'get'
   match '/users/mail', to: 'users#mail',  via: 'get'
+  match '/users/add_package', to: 'users#add_package',    via: 'post'
   match '/packages/index', to: 'packages#index',  via: 'get'
   match '/questions/index', to: 'questions#index',  via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
@@ -78,4 +79,15 @@ DeviseTest::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  if Rails.env.development?
+    app = ActionDispatch::Static.new(
+      lambda{ |env| [404, { 'X-Cascade' => 'pass'}, []] },
+      Rails.application.config.paths['public'].first,
+      Rails.application.config.static_cache_control
+    )
+
+    mount app, :at => '/', :as => :public
+  end
+
 end

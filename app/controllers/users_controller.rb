@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    $current_id = get_id
   end
 
   def edit
@@ -21,7 +22,20 @@ class UsersController < ApplicationController
       redirect_to '/users/index'
     else
       flash[:error] = "You do not have right to access this function."
-      redirect_to '/users/index'
+      render '/users/index'
+    end
+  end
+
+  def add_package
+    if current_user.try(:admin?)
+      @user = User.find($current_id)
+      @package = Package.find(params[:package_id])
+      if @package.valid?
+        @user.packages << @package
+      end
+      render action:'show', id: $current_id
+    else
+      flash[:error] = "You do not have right to access this function."
     end
   end
 
@@ -30,14 +44,14 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       # Sign in the user by passing validation in case his password changed
       sign_in @user, :bypass => true
-      redirect_to root_path
+      render root_path
     else
       render "edit"
     end
   end
 
   def get_id
-    id = request.original_url.split(/\?id=(\d{1,})/)
+    id = request.original_url.split(/\/(\d{1,})/)
     id.last
   end
 

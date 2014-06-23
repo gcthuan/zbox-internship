@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to zBox Labs, <%= @user.username %></h1>
+    <p>
+      You have successfully signed up to zBox Labs,
+      your username is: <%= @user.email %>.<br>
+    </p>
+    <p>
+      The test we have prepared for you is as following: 
+      <% @user.packages.each do |package| %>
+      <%= "http://" + ActionMailer::Base.default_url_options[:host] + "/packages/#{package.id}" %>
+      <% end %>
+    </p>
+    <p>Thanks for joining and good luck!</p>
+    </br>
+    <p>Cheers,</p>
+  </body>
+</html>

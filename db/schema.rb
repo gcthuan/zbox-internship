@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619082138) do
+ActiveRecord::Schema.define(version: 20140623034553) do
 
   create_table "packagations", force: true do |t|
     t.datetime "created_at"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20140619082138) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
+  create_table "tasks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "package_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -69,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140619082138) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "admin",                  default: false
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
