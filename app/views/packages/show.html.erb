@@ -24,15 +24,9 @@ span.margin {
   </tr>
   <% end %>
 </table>
-<% if current_user.try(:admin?) %>
-<%= form_tag("/packages/add", :method=>"post") do %>
-  <div class="field">
-  <%= text_field_tag(:question_id) %>
-  </div>
-  </br>
-  <div class="field">
-  <%= submit_tag("Add question", class: "btn btn-medium btn-primary") %>
-  </div>
-<% end %>
-<% end %>
 
+<% if current_user.try(:admin?) %>
+<%= form_tag '/packages/add' %>
+<%= autocomplete_field_tag :question_name, '', autocomplete_question_name_packages_path, :size => 35 %>
+<%= submit_tag("Add question", class: "btn btn-primary") %>
+<% end %>

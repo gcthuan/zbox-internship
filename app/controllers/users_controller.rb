@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-
+  autocomplete :package, :name, :full => true
   def index
     @users = User.paginate(page: params[:page])
   end
@@ -34,6 +34,17 @@ class UsersController < ApplicationController
         @user.packages << @package
       end
       render action:'show', id: $current_id
+    else
+      flash[:error] = "You do not have right to access this function."
+    end
+  end
+
+  def remove_package
+    if current_user.try(:admin?)
+      @user = User.find($current_id)
+      @package = Package.find(params[:id])
+      @user.packages.destroy(@package)
+      redirect_to action:'show', id: $current_id
     else
       flash[:error] = "You do not have right to access this function."
     end

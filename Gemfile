@@ -11,6 +11,8 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on'
 gem 'figaro'
+gem 'rails3-jquery-autocomplete'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'spork-rails', '4.0.0'

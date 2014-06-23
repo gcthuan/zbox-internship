@@ -1,4 +1,5 @@
 class PackagesController < ApplicationController
+  autocomplete :question, :name, :full => true
   $current_id = 0
   def new
     if current_user.try(:admin?)
@@ -36,7 +37,8 @@ class PackagesController < ApplicationController
   def add
     if current_user.try(:admin?)
   	  @package = Package.find($current_id)
-	    @question = Question.find(params[:question_id])
+
+	    @question = Question.find_by_name(params[:question_name])
 	    if @question.valid?
 		    @package.questions << @question
 	    end

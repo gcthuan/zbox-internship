@@ -7,26 +7,24 @@
     <th>Id</th>
     <th>Package Name</th>
     <th>Number of Question(s)</th>
+    <th><th>
   </tr>
   <% @user.packages.each do |package| %>
   <tr>
     <td><%= package.id %></td>
     <td><%= link_to package.name, controller: "packages", action: "show", id: package %></td>
     <td><%= package.questions.count %></td>
+    <% if current_user.try(:admin?) %>
+      <td><%= link_to "Delete", controller: "users", action: "remove_package", id: package %></td>
+    <% else %>
+      <td></td>
+    <% end %>
   </tr>
   <% end %>
 </table>
 
-<p>
-  <% if current_user.try(:admin?) %>
-    <%= form_tag("/users/add_package", :method=>"post") do %>
-    <div class="field">
-    <%= text_field_tag(:package_id) %>
-    </div>
-</br>
-    <div class="field">
-    <%= submit_tag("Add Package", class: "btn btn-medium btn-primary") %>
-    </div>
-  <% end %>
+<% if current_user.try(:admin?) %>
+<%= form_tag '/users/add_package' %>
+<%= autocomplete_field_tag :package_name, '', autocomplete_package_name_users_path, :size => 35 %>
+<%= submit_tag("Add package", class: "btn btn-primary") %>
 <% end %>
-</p>
