@@ -2,9 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
- # to make sure the script runs after page load
+ready = ->
   $(".item").each (event) -> # select all divs with the item class
-    max_length = 500 # set the max content length before a read more link will be added
+    max_length = 600 # set the max content length before a read more link will be added
     if $(this).html().length > max_length # check for content length
       short_content = $(this).html().substr(0, max_length) # split the content in two parts
       long_content = $(this).html().substr(max_length)
@@ -16,4 +16,7 @@
         return
     return
   return
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
 
