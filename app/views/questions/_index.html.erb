@@ -4,15 +4,28 @@
   <tr>
   	<th>Id</th>
   	<th>Name</th>
+    <th>Tags</th>
   	<th>Difficulty</th>
   </tr>
   <% @questions.each do |question| %>
   <tr>
+    
   	<td><%= question.id %></td>
-  	<td><%= link_to question.name, controller: "questions", action: "show", id: question %></td>
+  	<td class="item"><%= link_to question.name, controller: "questions", action: "show", id: question %></td>
+    <td class="item">
+    <% if question.tags.any? %>
+      <% question.tags.each do |tag| %>
+        <%= link_to tag.name, controller: "questions", action: "tag", tag: tag.name %>
+        <% if tag != question.tags.last %>
+          ,
+        <% end %>
+      <% end %>
+    <% end %>
+    </td>
   	<td><%= question.difficulty %></td>
   </tr>
   <% end %>
 </table>
 
 <%= will_paginate %>
+

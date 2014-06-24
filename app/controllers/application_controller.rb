@@ -15,6 +15,15 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
 
+  def auth_check
+    if user_signed_in?
+      return true
+    else
+      redirect_to new_user_session_path
+      return false
+    end
+end
+
   protected
 
   def configure_permitted_parameters

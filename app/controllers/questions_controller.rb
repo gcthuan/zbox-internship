@@ -4,17 +4,26 @@ class QuestionsController < ApplicationController
     if current_user.try(:admin?)
   	  @question = Question.new
     else
-      flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
   def index
-  	@questions = Question.paginate(page: params[:page])
+    if current_user.try(:admin?)
+  	  @questions = Question.paginate(page: params[:page])
+    else
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
+    end
   end
 
   def show
-    @question = Question.find(params[:id])
+    if auth_check
+      @question = Question.find(params[:id])
+    else
+      flash[:notice] = "You need to sign in or sign up before continue."
+    end
   end
 
   def create
@@ -27,8 +36,8 @@ class QuestionsController < ApplicationController
         render action: "new"
       end
     else
-      flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
@@ -36,8 +45,8 @@ class QuestionsController < ApplicationController
     if current_user.try(:admin?)
       @question= Question.find(params[:id])
     else
-      flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
@@ -51,8 +60,8 @@ class QuestionsController < ApplicationController
         render action: "edit"
       end
     else
-      flash[:error] = "You do not have right to access this function."
-      redirect_to '/questions/index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 

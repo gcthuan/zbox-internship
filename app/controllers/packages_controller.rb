@@ -5,18 +5,27 @@ class PackagesController < ApplicationController
     if current_user.try(:admin?)
       @package = Package.new
     else
-      flash[:error] = "You do not have right to access this function."
-      render :action => 'index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
   def index
-  	@packages = Package.paginate(page: params[:page])
+    if current_user.try(:admin?)
+  	  @packages = Package.paginate(page: params[:page])
+    else
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
+    end
   end
 
   def show
-    @package = Package.find(params[:id])
-    $current_id = get_id
+    if auth_check
+      @package = Package.find(params[:id])
+      $current_id = get_id
+    else
+      flash[:alert] = "You need to sign in or sign up before continue."
+    end
   end
 
   def create
@@ -29,22 +38,22 @@ class PackagesController < ApplicationController
         render 'new'
       end
     else
-      flash[:error] = "You do not have right to access this function."
-      render :action => 'index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
   def add
     if current_user.try(:admin?)
   	  @package = Package.find($current_id)
-
 	    @question = Question.find_by_name(params[:question_name])
 	    if @question.valid?
 		    @package.questions << @question
 	    end
 	    redirect_to action:'show', id: $current_id
     else
-      flash[:error] = "You do not have right to access this function."
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
@@ -55,7 +64,8 @@ class PackagesController < ApplicationController
       @package.questions.destroy(@question)
       redirect_to action:'show', id: $current_id
     else
-      flash[:error] = "You do not have right to access this function."
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 

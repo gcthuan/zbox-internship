@@ -21,8 +21,8 @@ class UsersController < ApplicationController
       flash[:success] = "Successfully sent."
       redirect_to '/users/index'
     else
-      flash[:error] = "You do not have right to access this function."
-      redirect_to '/users/index'
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
@@ -35,7 +35,8 @@ class UsersController < ApplicationController
       end
       render action:'show', id: $current_id
     else
-      flash[:error] = "You do not have right to access this function."
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 
@@ -46,7 +47,8 @@ class UsersController < ApplicationController
       @user.packages.destroy(@package)
       redirect_to action:'show', id: $current_id
     else
-      flash[:error] = "You do not have right to access this function."
+      flash[:alert] = "You do not have right to access this function."
+      redirect_to root_path
     end
   end
 

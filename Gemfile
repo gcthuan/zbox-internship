@@ -13,6 +13,7 @@ gem 'acts-as-taggable-on'
 gem 'figaro'
 gem 'rails3-jquery-autocomplete'
 gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'spork-rails', '4.0.0'

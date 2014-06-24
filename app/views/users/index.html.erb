@@ -7,12 +7,14 @@
   	<th>Id</th>
     <th>Name</th>
   	<th>Email</th>
+    <th>Joined Date</th>
   </tr>
   <% @users.each do |user| %>
   <tr>
   	<td><%= user.id %></td>
     <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
   	<td><%= link_to user.email, controller: "users", action: "show", id: user %></td>
+    <td><%= user.created_at %>
   </tr>
   <% end %>
 </table>
