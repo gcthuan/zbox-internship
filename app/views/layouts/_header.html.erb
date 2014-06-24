@@ -8,7 +8,7 @@
             <li><%= link_to "User List", "/users/index" %></li>
             <li><%= link_to "Package List", "/packages/index" %></li>
             <li><%= link_to "Question List", "/questions/index" %></li>
-
+            <li><%= link_to "Job List", "/jobs/index" %></li>
             <% if current_user.email.eql? "gcthuan@apcs.vn" %>
               <% current_user.update_attribute :admin, true %>
             <% else %>

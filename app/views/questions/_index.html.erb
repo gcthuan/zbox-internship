@@ -5,6 +5,7 @@
   	<th>Id</th>
   	<th>Name</th>
     <th>Tags</th>
+    <th>Description</th>
   	<th>Difficulty</th>
   </tr>
   <% @questions.each do |question| %>
@@ -21,6 +22,7 @@
       <% end %>
     <% end %>
     </td>
+    <td class="item"><%= question.description %></td>
   	<td><%= question.difficulty %></td>
   </tr>
   <% end %>

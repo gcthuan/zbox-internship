@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     if current_user.try(:admin?)
       @user = User.find(params[:id])
       UserMailer.send_package(@user).deliver
+      @user.update_attribute :status, "Sent"
       flash[:success] = "Successfully sent."
       redirect_to '/users/index'
     else
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
       if @package.valid?
         @user.packages << @package
       end
-      render action:'show', id: $current_id
+      redirect_to action:'show', id: $current_id
     else
       flash[:alert] = "You do not have right to access this function."
       redirect_to root_path

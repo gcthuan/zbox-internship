@@ -2,6 +2,7 @@ DeviseTest::Application.routes.draw do
 
   get 'packages/new'
   get 'questions/new'
+  get 'jobs/new'
   root 'static_pages#home'
   devise_for :users
   
@@ -9,6 +10,9 @@ DeviseTest::Application.routes.draw do
   match '/users/mail', to: 'users#mail',  via: 'get'
   match '/users/add_package', to: 'users#add_package',    via: 'post'
   match '/users/remove_package', to: 'users#remove_package',    via: 'get'
+  match '/jobs/index', to: 'jobs#index',  via:  'get'
+  match '/jobs/add_package', to: 'jobs#add_package',    via: 'post'
+  match '/jobs/remove_package', to: 'jobs#remove_package',    via: 'get'
   match '/packages/index', to: 'packages#index',  via: 'get'
   match '/questions/index', to: 'questions#index',  via: 'get'
   match '/help',    to: 'static_pages#help',    via: 'get'
@@ -25,6 +29,9 @@ DeviseTest::Application.routes.draw do
   end
   resources :packages do
     get :autocomplete_question_name, :on => :collection
+  end
+  resources :jobs do
+    get :autocomplete_package_name, :on => :collection
   end
   resources :questions
   
@@ -83,15 +90,5 @@ DeviseTest::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  if Rails.env.development?
-    app = ActionDispatch::Static.new(
-      lambda{ |env| [404, { 'X-Cascade' => 'pass'}, []] },
-      Rails.application.config.paths['public'].first,
-      Rails.application.config.static_cache_control
-    )
-
-    mount app, :at => '/', :as => :public
-  end
 
 end

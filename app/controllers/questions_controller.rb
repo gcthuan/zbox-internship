@@ -76,7 +76,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-	    params.require(:question).permit(:name, :body, :difficulty, :tag_list)
+	    params.require(:question).permit(:name, :description, :body, :difficulty, :tag_list)
     end
   
 end
