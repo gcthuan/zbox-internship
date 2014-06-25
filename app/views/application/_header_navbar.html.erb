@@ -1,0 +1,20 @@
+<%= link_to image_tag("logo-trans.png", size: "50x50"), root_path %>
+<nav>
+  <ul class="nav navbar-nav navbar-right">
+    <% if user_signed_in? %>
+    <li id="fat-menu" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <%= current_user.username %><b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Profile", '#' %></li>
+      <li><%= link_to "Settings", '/users/edit' %></li>
+      <li class="divider"></li>
+      <li><%= link_to "Sign out", "/users/sign_out" %></li>
+    </ul>
+    </li>
+    <% else %>
+      <li><%= link_to "Sign in", "/users/sign_in" %></li>
+    <% end %>
+    </ul>
+</nav>

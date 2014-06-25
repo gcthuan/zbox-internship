@@ -1,0 +1,20 @@
+<%= link_to image_tag("logo-trans.png", size: "50x50"), "/admin" %>
+<nav>
+  <ul class="nav navbar-nav navbar-right">
+    <li><%= link_to "User List", "/admin/users/index" %></li>
+    <li><%= link_to "Package List", "/admin/packages/index" %></li>
+    <li><%= link_to "Question List", "/admin/questions/index" %></li>
+    <li><%= link_to "Job List", "/admin/jobs/index" %></li>
+    <li id="fat-menu" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <%= current_user.username %><b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Profile", '#' %></li>
+      <li><%= link_to "Settings", '/users/edit' %></li>
+      <li class="divider"></li>
+      <li><%= link_to "Sign out", "/users/sign_out" %></li>
+    </ul>
+    </li>
+  </ul>
+</nav>
