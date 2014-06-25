@@ -26,6 +26,8 @@ ZboxInternship::Application.routes.draw do
     end
   end
 
+  resources :users, only: [:show]
+
   resources :jobs, only: [:show]
   resources :packages, only: [:show]
 
@@ -35,9 +37,6 @@ ZboxInternship::Application.routes.draw do
       get :autocomplete_question_name, :on => :collection
     end
     resources :jobs do
-      get :autocomplete_package_name, :on => :collection
-    end
-    resources :users do
       get :autocomplete_package_name, :on => :collection
     end
   end

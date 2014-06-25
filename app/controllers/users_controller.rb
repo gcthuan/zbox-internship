@@ -1,57 +1,15 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  autocomplete :package, :name, :full => true
-  def index
-    @users = User.paginate(page: params[:page])
-  end
+
 
   def show
     @user = User.find(params[:id])
-    $current_id = get_id
   end
 
   def edit
     @user = current_user
   end
 
-  def mail
-    if current_user.try(:admin?)
-      @user = User.find(params[:id])
-      UserMailer.send_package(@user).deliver
-      @user.update_attribute :status, "Sent"
-      flash[:success] = "Successfully sent."
-      redirect_to '/users/index'
-    else
-      flash[:alert] = "You do not have right to access this function."
-      redirect_to root_path
-    end
-  end
-
-  def add_package
-    if current_user.try(:admin?)
-      @user = User.find($current_id)
-      @package = Package.find_by_name(params[:package_name])
-      if @package.valid?
-        @user.packages << @package
-      end
-      redirect_to action:'show', id: $current_id
-    else
-      flash[:alert] = "You do not have right to access this function."
-      redirect_to root_path
-    end
-  end
-
-  def remove_package
-    if current_user.try(:admin?)
-      @user = User.find($current_id)
-      @package = Package.find(params[:id])
-      @user.packages.destroy(@package)
-      redirect_to action:'show', id: $current_id
-    else
-      flash[:alert] = "You do not have right to access this function."
-      redirect_to root_path
-    end
-  end
 
   def update_password
     @user = User.find(current_user.id)
@@ -62,11 +20,6 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
-  end
-
-  def get_id
-    id = request.original_url.split(/\/(\d{1,})/)
-    id.last
   end
 
   private
