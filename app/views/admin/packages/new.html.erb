@@ -2,7 +2,7 @@
 <h1>Create package</h1>
 
 <div class="form-group">
-    <%= form_for(@package) do |f| %>
+    <%= form_for([:admin, @package]) do |f| %>
 	
       <%= f.label :name %>
       <%= f.text_field :name %>
