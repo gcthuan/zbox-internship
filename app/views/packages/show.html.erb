@@ -1,2 +1,10 @@
 <% provide(:title, @package.name) %>
-
+<% i = 1 %>
+<h1><%= @package.name %></h1>
+<% @package.questions.each do |question| %>
+</br>
+<h2><%= "Question #{i}." %>
+<h3><%= question.name.html_safe %></h3>
+<p><%= question.body.html_safe %></p>
+<% i += 1%>
+<% end %>

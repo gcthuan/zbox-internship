@@ -2,6 +2,9 @@
 <nav>
   <ul class="nav navbar-nav navbar-right">
     <% if user_signed_in? %>
+    <% if current_user.try(:admin?) %>
+      <li><%= link_to "Admin Panel", "/admin" %></li>
+    <% end %>
     <li id="fat-menu" class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <%= current_user.username %><b class="caret"></b>
