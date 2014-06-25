@@ -16,8 +16,7 @@
 //= require jquery.ui.all
 //= require autocomplete-rails
 //= require bootstrap
-//= require ckeditor/override
-//= require ckeditor/init
+
 //= require_tree .
 //= require turbolinks
 
