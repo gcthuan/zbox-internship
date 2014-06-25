@@ -9,3 +9,7 @@ task "assets:precompile" do
     FileUtils.cp file, nondigest, verbose: true
   end
 end
+
+Rake::Task['assets:precompile'].enhance do
+  Rake::Task['ckeditor:create_nondigest_assets'].invoke
+end

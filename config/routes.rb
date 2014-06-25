@@ -1,4 +1,4 @@
-DeviseTest::Application.routes.draw do
+ZboxInternship::Application.routes.draw do
 
   root 'static_pages#home'
 

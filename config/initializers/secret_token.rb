@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-DeviseTest::Application.config.secret_key_base = '709a8a89c6bd4014a921ddb86a067af327d32ed52cffbfe2a65ff4de28f6e3408016b18b45f267f46770fe5a884f1120983bd0fd7ec8692409ca08389400e6ca'
+ZboxInternship::Application.config.secret_key_base = '709a8a89c6bd4014a921ddb86a067af327d32ed52cffbfe2a65ff4de28f6e3408016b18b45f267f46770fe5a884f1120983bd0fd7ec8692409ca08389400e6ca'

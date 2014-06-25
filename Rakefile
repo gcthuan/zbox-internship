@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-DeviseTest::Application.load_tasks
+ZboxInternship::Application.load_tasks
