@@ -1,3 +1,30 @@
 <% provide(:title, @user.username) %>
 <h1><%= @user.username %>
+<%= link_to "Send", { controller: "users", action: "mail", id: @user }, class: "btn btn-large btn-primary inline" %>
 </h1>
+<table class="table table-hover">
+  <tr>
+    <th>Id</th>
+    <th>Package Name</th>
+    <th>Number of Question(s)</th>
+    <th><th>
+  </tr>
+  <% @user.packages.each do |package| %>
+  <tr>
+    <td><%= package.id %></td>
+    <td><%= link_to package.name, controller: "packages", action: "show", id: package %></td>
+    <td><%= package.questions.count %></td>
+    <% if current_user.try(:admin?) %>
+      <td><%= link_to "Delete", controller: "users", action: "remove_package", id: package %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+
+<% if current_user.try(:admin?) %>
+<%= form_tag '/users/add_package' %>
+<%= autocomplete_field_tag :package_name, '', autocomplete_package_name_users_path, :size => 35 %>
+<%= submit_tag("Add package", class: "btn btn-primary") %>
+<% end %>

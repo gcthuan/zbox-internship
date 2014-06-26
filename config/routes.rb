@@ -2,7 +2,7 @@ ZboxInternship::Application.routes.draw do
 
   root 'static_pages#home'
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "my_devise/registrations" }
   
   match '/help',    to: 'static_pages#help',    via: 'get'
 
@@ -20,13 +20,9 @@ ZboxInternship::Application.routes.draw do
   match '/admin/users/add_package', to: 'admin/users#add_package',    via: 'post'
   match '/admin/users/remove_package', to: 'admin/users#remove_package',    via: 'get'
 
-  resource :users, only: [:edit] do
-    collection do
-      patch 'update_password'
-    end
+  resources :users do
+    get :autocomplete_job_name, :on => :collection
   end
-
-  resources :users, only: [:show]
 
   resources :jobs, only: [:show]
   resources :packages, only: [:show]
@@ -39,6 +35,7 @@ ZboxInternship::Application.routes.draw do
     resources :jobs do
       get :autocomplete_package_name, :on => :collection
     end
+    resources :users
   end
   
   

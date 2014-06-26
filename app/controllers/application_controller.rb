@@ -26,12 +26,15 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
       return false
     end
-end
+  end
 
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password,
+      :password_confirmation, :remember_me, :submission) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password,
+      :password_confirmation, :current_password, :submission, :job_name) }
   end
 
 end

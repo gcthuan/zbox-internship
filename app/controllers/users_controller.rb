@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
+  autocomplete :package, :name, :full => true
+  autocomplete :job, :name, :full => true
 
+  def index
+    @users = User.paginate(page: params[:page])
+  end
 
   def show
     @user = User.find(params[:id])
@@ -10,17 +15,15 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-
-  def update_password
+  def submit
     @user = User.find(current_user.id)
     if @user.update(user_params)
-      # Sign in the user by passing validation in case his password changed
-      sign_in @user, :bypass => true
       redirect_to root_path
     else
-      render "edit"
+      render "submit"
     end
   end
+
 
   private
 
