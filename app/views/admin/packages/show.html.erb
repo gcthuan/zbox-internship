@@ -25,7 +25,6 @@ span.margin {
   <% end %>
 </table>
 
-<% if current_user.try(:admin?) %>
 <%= form_tag '/admin/packages/add' %>
 <%= autocomplete_field_tag :question_name, '', autocomplete_question_name_admin_packages_path, :size => 35 %>
 <%= submit_tag("Add question", class: "btn btn-primary") %>

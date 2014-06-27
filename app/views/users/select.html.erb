@@ -1,0 +1,4 @@
+<h2>Select a job available</h2>
+<%= form_tag '/users/submit' %>
+<%= autocomplete_field_tag :job_name, '', autocomplete_job_name_users_path, :size => 35 %>
+<%= submit_tag("Select job", class: "btn btn-primary") %>

@@ -17,11 +17,14 @@ class UsersController < ApplicationController
 
   def submit
     @user = User.find(current_user.id)
-    if @user.update(user_params)
-      redirect_to root_path
+    if Job.where(:name => params[:job_name]).any?
+      @user.update_attributes :job_name => params[:job_name]
+      redirect_to 'users/edit'
     else
-      render "submit"
+      flash[:error] = "Invalid job"
+      redirect_to root_path
     end
+
   end
 
 
@@ -29,6 +32,6 @@ class UsersController < ApplicationController
 
   def user_params
     # NOTE: Using `strong_parameters` gem
-    params.required(:user).permit(:password, :password_confirmation)
+    params.required(:user).permit(:password, :password_confirmation, :job_name)
   end
 end

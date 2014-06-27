@@ -6,6 +6,9 @@ ZboxInternship::Application.routes.draw do
   
   match '/help',    to: 'static_pages#help',    via: 'get'
 
+  match '/users/submit',  to: 'users#submit', via: 'post'
+  match '/users/select',  to: 'users#select', via: 'get'
+
   match '/admin', to: 'admin/static_pages#home',  via: 'get'
   match '/admin/packages/index', to: 'admin/packages#index',  via: 'get'
   match '/admin/packages/add', to: 'admin/packages#add',    via: 'post'

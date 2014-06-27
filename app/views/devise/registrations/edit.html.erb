@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Submission</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true }) do |f| %>
   <%= devise_error_messages! %>
@@ -7,16 +7,17 @@
     <p class="form-control-static"><%= current_user.email %></p>
   </div>
   
-  <div><%= f.label :job %></br>
-  <%= f.autocomplete_field :job_name, autocomplete_job_name_users_path, :size => 35 %></div>
+   <div class="controls"><%= f.label :job %><br />
+    <p class="form-control-static"><%= current_user.job_name %></p>
+  </div>
   
-  <div><%= f.label :submission %></div><br />
+  <div><%= f.label :submission %></div>
   <div><%= f.file_field :submission %></div></br>
 
   <div><%= f.label :current_password %> <i>(Please enter your password)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
-
+  </br>
   <div><%= f.submit "Update", class: "btn btn-primary" %></div>
 <% end %>
   </br>

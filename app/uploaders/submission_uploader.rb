@@ -8,6 +8,10 @@ class SubmissionUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
+
+  configure do |config|
+    config.remove_previously_stored_files_after_update = false
+  end
   # storage :fog
 
   # Override the directory where uploaded files will be stored.

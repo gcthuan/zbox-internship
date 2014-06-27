@@ -10,7 +10,4 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-	#def update_with_password(params, *options)
-	 # self.update_attribute :status, "Submitted"
-	#end
 end

@@ -24,7 +24,24 @@
         <% end %>
       </table>
   </div>
-  <div class="tab-pane" id="profile">profile</div>
+  <div class="tab-pane" id="profile">
+    <table class="table table-hover">
+    <tr>
+      <th>Job</th>
+      <th>User</th>
+      <th>Status</th>
+    </tr>
+    <% @jobs.each do |job| %>
+      <% job.users.each do |user| %>
+    <tr>
+        <td class="item"><%= link_to job.name, controller: "jobs", action: "show", id: job %></td>
+        <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
+        <td><%= user.status %></td>
+      <% end %>
+      </tr>
+    <% end %>
+      </table>
+  </div>
   <div class="tab-pane" id="messages">messages</div>
   <div class="tab-pane" id="settings">settings</div>
 </div>
