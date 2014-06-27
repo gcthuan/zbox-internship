@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     if Job.where(:name => params[:job_name]).any?
       @user.update_attributes :job_name => params[:job_name]
-      redirect_to 'users/edit'
+      redirect_to '/users/edit'
     else
       flash[:error] = "Invalid job"
       redirect_to root_path
