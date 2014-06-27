@@ -23,7 +23,7 @@ ZboxInternship::Application.routes.draw do
   match '/admin/users/add_package', to: 'admin/users#add_package',    via: 'post'
   match '/admin/users/remove_package', to: 'admin/users#remove_package',    via: 'get'
 
-  resources :users do
+  resources :users, except: [:index] do
     get :autocomplete_job_name, :on => :collection
   end
 
@@ -38,7 +38,9 @@ ZboxInternship::Application.routes.draw do
     resources :jobs do
       get :autocomplete_package_name, :on => :collection
     end
-    resources :users
+    resources :users do
+      get :autocomplete_package_name, :on => :collection
+    end
   end
   
   
