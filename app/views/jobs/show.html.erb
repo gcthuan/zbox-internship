@@ -9,7 +9,7 @@
   <% else %>
 	You can take our test for this job 
     <% @job.packages.each do |package| %>
-    <%= link_to "here.", "http://" + ActionMailer::Base.default_url_options[:host] + "/packages/#{package.id}" %>
+    <%= link_to "here.", request.host + ":" + request.port.to_s + "/packages/#{package.id}" %>
   	<% end %>
   <% end %>
 </p>
