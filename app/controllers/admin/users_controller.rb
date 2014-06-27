@@ -16,6 +16,11 @@ class Admin::UsersController < BaseController
     @user = current_user
   end
 
+  def download_file
+    upload = SubmissionUploader.find(params[:id])
+    send_file upload.attachment.url
+  end
+
   def mail
     @user = User.find(params[:id])
     UserMailer.send_package(@user).deliver

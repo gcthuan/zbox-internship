@@ -8,6 +8,7 @@ ZboxInternship::Application.routes.draw do
 
   match '/users/submit',  to: 'users#submit', via: 'post'
   match '/users/select',  to: 'users#select', via: 'get'
+  match '/users/download_file',  to: 'users#download_file', via: 'get'
 
   match '/admin', to: 'admin/static_pages#home',  via: 'get'
   match '/admin/packages/index', to: 'admin/packages#index',  via: 'get'
