@@ -41,10 +41,6 @@ class Admin::PackagesController < BaseController
     redirect_to action:'show', id: $current_id
   end
 
-  def delete
-	
-  end
-
   def get_id
 	id = request.original_url.split(/\/(\d{1,})/)
     id.last

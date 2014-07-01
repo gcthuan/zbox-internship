@@ -40,6 +40,13 @@ class Admin::UsersController < BaseController
     redirect_to action:'show', id: $current_id
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+        redirect_to '/admin/users/index', notice: "User deleted."
+    end
+  end
+
   def update_password
     @user = User.find(current_user.id)
     if @user.update(user_params)
@@ -52,8 +59,7 @@ class Admin::UsersController < BaseController
   end
 
   def get_id
-    id = request.original_url.split(/\/(\d{1,})/)
-    id.last
+    request.original_url.split(/\/(\d{1,})/).last
   end
 
   private

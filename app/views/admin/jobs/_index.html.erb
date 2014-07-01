@@ -38,7 +38,10 @@
         <td class="item"><%= link_to job.name, controller: "jobs", action: "show", id: job %></td>
         <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
         <td><%= user.status %></td>
-        <td><%= link_to "Download file", user.submission.url %></td>
+        <td><% if user.submission.url.nil? == false %>
+          <%= link_to "Download file", user.submission.url %>
+            <% end %>
+        </td>
       <% end %>
       </tr>
     <% end %>

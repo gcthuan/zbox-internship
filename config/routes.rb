@@ -8,6 +8,7 @@ ZboxInternship::Application.routes.draw do
 
   match '/users/submit',  to: 'users#submit', via: 'post'
   match '/users/select',  to: 'users#select', via: 'get'
+  
 
   match '/admin', to: 'admin/static_pages#home',  via: 'get'
   match '/admin/packages/index', to: 'admin/packages#index',  via: 'get'
@@ -18,10 +19,13 @@ ZboxInternship::Application.routes.draw do
   match '/admin/jobs/index', to: 'admin/jobs#index',  via:  'get'
   match '/admin/jobs/add_package', to: 'admin/jobs#add_package',    via: 'post'
   match '/admin/jobs/remove_package', to: 'admin/jobs#remove_package',    via: 'get'
+  match '/jobs/apply',   to: 'jobs#apply',  via: 'get'
+
   match '/admin/users/index', to: 'admin/users#index',  via: 'get'
   match '/admin/users/mail', to: 'admin/users#mail',  via: 'get'
   match '/admin/users/add_package', to: 'admin/users#add_package',    via: 'post'
   match '/admin/users/remove_package', to: 'admin/users#remove_package',    via: 'get'
+  match '/admin/users/destroy', to: 'admin/users#destroy',  via: 'get'
 
   resources :users, except: [:index] do
     get :autocomplete_job_name, :on => :collection
@@ -38,7 +42,7 @@ ZboxInternship::Application.routes.draw do
     resources :jobs do
       get :autocomplete_package_name, :on => :collection
     end
-    resources :users do
+    resources :users, except: [:destroy] do
       get :autocomplete_package_name, :on => :collection
     end
   end

@@ -1,39 +1,9 @@
 <% provide(:title, @job.name) %>
-<div>
-<% if current_user.try(:admin?) %>
-<%= form_tag '/admin/jobs/add_package' %>
-<%= autocomplete_field_tag :package_name, '', autocomplete_package_name_admin_jobs_path, :size => 35 %>
-<%= submit_tag("Add test", class: "btn btn-primary btn-sm") %>
-</br>
-<% if @job.packages.empty? %>
-  No test is given to this job.
-<% else %>
-  Current test associated with this job: 
-  <ul>
-  <% @job.packages.each do |package| %>
-  <li>
-    <%= link_to package.name, controller: "packages", action: "show", id: package %>
-	<%= link_to "Delete", { controller: "jobs", action: "remove_package", id: package }, class: "btn btn-primary btn-xs"  %>
-  </li>
-  <% end %>
-  </ul>
-<% end %>
-<% end %>
-</div>
 
 <h3><%= @job.name.html_safe %></h3>
 
 <p><%= @job.body.html_safe %></p>
 
-<p>
-  <% if @job.packages.empty? %>
-	No test is avaible for this job at the moment.
-  <% else %>
-	You can take our test for this job 
-    <% @job.packages.each do |package| %>
-    <%= link_to "here.", "/packages/#{package.id}" %>
-  	<% end %>
-  <% end %>
 </p>
 <% if current_user.try(:admin?) %>
   <%= link_to "Edit Job", edit_admin_job_path(@job) %>

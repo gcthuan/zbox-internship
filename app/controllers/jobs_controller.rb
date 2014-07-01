@@ -1,11 +1,25 @@
 class JobsController < ApplicationController
 
   def show
-    if auth_check
-      @job = Job.find(params[:id])
+    @job = Job.find(params[:id])
+    $current_job_id = get_id
+  end
+
+  def apply
+    if auth_check == false
+      flash[:alert] = "You are not signed in"
     else
-      flash[:alert] = "You need to sign in or sign up before continue."
+      @user = User.find(current_user.id)
+      @job = Job.find($current_job_id)
+      @user.jobs << @job
+      flash[:success] = "You have successfully applied for this job. We will contact you as soon as we finish looking at your CV."
+      redirect_to root_path
     end
+  end
+
+  def get_id
+	id = request.original_url.split(/\/(\d{1,})/)
+    id.last
   end
 
 end

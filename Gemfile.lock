@@ -29,6 +29,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.2.6)
       activerecord (>= 3, < 5)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
     bootstrap-sass (3.1.1.1)
@@ -60,6 +61,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    database_cleaner (0.9.1)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -69,6 +71,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
     ffi (1.9.3)
@@ -88,6 +95,8 @@ GEM
     jquery-ui-rails (4.2.1)
       railties (>= 3.2.16)
     json (1.8.1)
+    launchy (2.2.0)
+      addressable (~> 2.3)
     libnotify (0.8.0)
       ffi (>= 1.0.11)
     mail (2.5.4)
@@ -207,13 +216,16 @@ DEPENDENCIES
   childprocess (= 0.3.6)
   ckeditor
   coffee-rails (= 4.0.1)
+  database_cleaner (= 0.9.1)
   devise
+  factory_girl_rails (= 4.2.1)
   faker (= 1.1.2)
   figaro
   jbuilder (= 1.0.2)
   jquery-rails (= 3.0.4)
   jquery-turbolinks
   jquery-ui-rails
+  launchy (= 2.2.0)
   libnotify (= 0.8.0)
   meta_request
   pg (= 0.15.1)

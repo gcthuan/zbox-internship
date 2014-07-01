@@ -9,6 +9,9 @@
   	<th>Email</th>
     <th>Joined Date</th>
     <th>Status</th>
+    <th>CV</th>
+    <th></th>
+    <th></th>
   </tr>
   <% @users.each do |user| %>
   <tr>
@@ -17,6 +20,18 @@
   	<td><%= link_to user.email, controller: "users", action: "show", id: user %></td>
     <td><%= user.created_at %></td>
     <td><%= user.status %></td>
+    <td>
+      <% if user.cv.url.nil? == false %>
+      <%= link_to "Download CV", user.cv.url %>
+      <% end %>
+    </td>
+    <% if user.status == "Registered" %>
+      <td><%= link_to "Accept", { controller: "users", action: "mail", id: user }, class: "btn btn-primary" %></td>
+      <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary" %></td>
+    <% else %>
+      <td>CV accepted</td>
+      <td></td>
+    <% end %>
   </tr>
   <% end %>
 </table>

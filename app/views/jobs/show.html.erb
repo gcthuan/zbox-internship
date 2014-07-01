@@ -1,16 +1,8 @@
 <% provide(:title, @job.name) %>
+<%= link_to "Apply", { controller: "jobs", action: "apply" }, class: "btn btn-primary" %>
+
 <h3><%= @job.name.html_safe %></h3>
 
 <p><%= @job.body.html_safe %></p>
 
-<p>
-  <% if @job.packages.empty? %>
-	No test is avaible for this job at the moment.
-  <% else %>
-	You can take our test for this job 
-    <% @job.packages.each do |package| %>
-    <%= link_to "here.", "/packages/#{package.id}" %>
-  	<% end %>
-  <% end %>
-</p>
 
