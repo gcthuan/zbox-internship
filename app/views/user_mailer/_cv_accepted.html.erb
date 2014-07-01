@@ -1,4 +1,4 @@
 <p>
   <%= "Dear #{@user.username}, " %></br>
-  cv_accepted
+  This is your test: <%= "http://" + ActionMailer::Base.default_url_options[:host] + "/packages/#{@user.package.id}" %>
 </p>

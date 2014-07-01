@@ -18,6 +18,12 @@ class Admin::UsersController < BaseController
 
   def mail
     @user = User.find(params[:id])
+    @job = @user.job
+    @questions = Question.tagged_with(@job.tag_list, :any => true)
+    @test = @questions.order_by_rand.limit(1).all
+    @package = Package.create(:name => "#{@user.email} test")
+    @package.questions << @test
+    @package.user = @user
     UserMailer.send_package(@user).deliver
     @user.update_attribute :status, "Sent"
     flash[:success] = "Successfully sent."

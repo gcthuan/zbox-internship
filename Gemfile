@@ -15,6 +15,7 @@ gem 'rails3-jquery-autocomplete'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'carrierwave'
+gem 'randumb'
 
 group :development, :test do
   gem 'spork-rails', '4.0.0'

@@ -143,6 +143,10 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
+    randumb (0.5.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      rake
     rdoc (3.12.2)
       json (~> 1.4)
     rspec-core (2.13.1)
@@ -232,6 +236,7 @@ DEPENDENCIES
   rails (~> 4.1.1)
   rails3-jquery-autocomplete
   rails_12factor (= 0.0.2)
+  randumb
   rspec-rails (= 2.13.1)
   sass-rails (= 4.0.1)
   sdoc (= 0.3.20)
