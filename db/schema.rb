@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701101809) do
+ActiveRecord::Schema.define(version: 20140702072932) do
 
   create_table "cvs", force: true do |t|
     t.datetime "created_at"
@@ -99,9 +99,10 @@ ActiveRecord::Schema.define(version: 20140701101809) do
     t.datetime "submission_updated_at"
     t.string   "submission"
     t.string   "job_name"
-    t.string   "cv"
     t.integer  "job_id"
     t.integer  "package_id"
+    t.datetime "deadline"
+    t.string   "cv",                      default: "",           null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

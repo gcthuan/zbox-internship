@@ -25,7 +25,8 @@ class Admin::UsersController < BaseController
     @package.questions << @test
     @package.user = @user
     UserMailer.send_package(@user).deliver
-    @user.update_attribute :status, "Sent"
+    @user.update_attribute :status, "cv_accepted"
+    @user.update_attribute :deadline, Time.current + 5.minutes
     flash[:success] = "Successfully sent."
     redirect_to '/admin/users/index'
   end

@@ -20,7 +20,8 @@ class UsersController < ApplicationController
       flash[:success] = "You have successfully submitted your answer. Please wait while we can take a look at it."
       redirect_to :back
     else
-      render "edit"
+      flash[:alert] = "Submission time is over!"
+      redirect_to :back
     end
   end
 
