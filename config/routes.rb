@@ -17,6 +17,7 @@ ZboxInternship::Application.routes.draw do
   match '/admin/questions', to: 'admin/questions#tag', via:  'get'
   match '/admin/questions/index', to: 'admin/questions#index', via:  'get'
   match '/admin/jobs/index', to: 'admin/jobs#index',  via:  'get'
+  match '/admin/jobs', to: 'admin/jobs#tag', via:  'get'
   match '/admin/jobs/add_package', to: 'admin/jobs#add_package',    via: 'post'
   match '/admin/jobs/remove_package', to: 'admin/jobs#remove_package',    via: 'get'
   match '/jobs/apply',   to: 'jobs#apply',  via: 'get'

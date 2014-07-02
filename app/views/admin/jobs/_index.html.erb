@@ -13,12 +13,24 @@
       <tr>
         <th>Id</th>
         <th>Name</th>
+        <th>Tags</th>
         <th>Description</th>
+        <th></th>
       </tr>
         <% @jobs.each do |job| %>
       <tr>
         <td><%= job.id %></td>
         <td class="item"><%= link_to job.name, controller: "jobs", action: "show", id: job %></td>
+        <td class="item">
+        <% if job.tags.any? %>
+          <% job.tags.each do |tag| %>
+            <%= link_to tag.name, controller: "jobs", action: "tag", tag: tag.name %>
+            <% if tag != job.tags.last %>
+              ,
+            <% end %>
+          <% end %>
+        <% end %>
+        </td>
         <td class="item"><%= job.description %></td>
       </tr>
         <% end %>
@@ -30,7 +42,7 @@
       <th>Job</th>
       <th>User</th>
       <th>Status</th>
-      <th></th>
+      <th>Submission</th>
     </tr>
     <% @jobs.each do |job| %>
       <% job.users.each do |user| %>

@@ -1,4 +1,19 @@
 <% provide(:title, @package.name) %>
+Please copy all your files into a directory names YourName_PositionApplied and compress the whole directory as YourName_PositionApplied.rar/zip then
+submit as below.</br></br>
+
+<%= form_for current_user, :html => { :multipart => true } do |f| %>
+<div><%= f.file_field :submission %></div></br>
+<div>
+  Your current submission:
+  <% if current_user.submission.nil? == false %>
+  <%= link_to current_user.submission.to_s.split(/\//).last, current_user.submission.url, :target => '_blank' %>
+  <% end %>
+</div></br>
+<div><%= f.submit "Submit", class: "btn btn-primary" %></div>
+<% end %>
+</br>
+
 <% i = 1 %>
 <h1><%= @package.name %></h1>
 <% @package.questions.each do |question| %>
@@ -7,4 +22,5 @@
 <h3><%= question.name.html_safe %></h3>
 <p><%= question.body.html_safe %></p>
 <% i += 1%>
+
 <% end %>

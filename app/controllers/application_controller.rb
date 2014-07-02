@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       return true
     else
+      flash[:alert] = "You need to sign in to continue!"
       redirect_to new_user_session_path
       return false
     end

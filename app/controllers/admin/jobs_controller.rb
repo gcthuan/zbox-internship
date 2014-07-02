@@ -42,6 +42,14 @@ class Admin::JobsController < BaseController
     redirect_to action:'show', id: $current_id
   end
 
+  def tag
+    if params[:tag].present?
+      @jobs = Job.tagged_with(params[:tag]).paginate(:per_page => 30, :page => params[:page])
+    else 
+      @jobs = Job.paginate(page: params[:page])
+    end
+  end
+
   def edit
     @job= Job.find(params[:id])
   end

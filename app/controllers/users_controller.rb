@@ -14,10 +14,20 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def update
+    @user = current_user
+    if @user.update(user_params)
+      flash[:success] = "You have successfully submitted your answer. Please wait while we can take a look at it."
+      redirect_to :back
+    else
+      render "edit"
+    end
+  end
+
   private
 
   def user_params
     # NOTE: Using `strong_parameters` gem
-    params.required(:user).permit(:password, :password_confirmation, :job_name)
+    params.required(:user).permit(:password, :password_confirmation, :job_name, :submission)
   end
 end

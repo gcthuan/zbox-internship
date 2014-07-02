@@ -44,7 +44,7 @@ class Admin::QuestionsController < BaseController
       @questions = Question.tagged_with(params[:tag]).paginate(:per_page => 30, :page => params[:page])
     else 
       @questions = Question.paginate(page: params[:page])
-  end
+    end
   end
 
   private

@@ -22,12 +22,12 @@
     <td><%= user.status %></td>
     <td>
       <% if user.cv.url.nil? == false %>
-      <%= link_to "Download CV", user.cv.url %>
+      <%= link_to "Download CV", user.cv.url, :target => '_blank' %>
       <% end %>
     </td>
     <% if user.status == "Registered" %>
-      <td><%= link_to "Accept", { controller: "users", action: "mail", id: user }, class: "btn btn-primary" %></td>
-      <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary" %></td>
+      <td><%= link_to "Accept", { controller: "users", action: "mail", id: user }, class: "btn btn-primary btn-sm" %></td>
+      <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary btn-sm" %></td>
     <% else %>
       <td>CV accepted</td>
       <td></td>

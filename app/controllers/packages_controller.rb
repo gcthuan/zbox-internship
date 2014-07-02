@@ -1,10 +1,12 @@
 class PackagesController < ApplicationController
 
   def show
+  	@package = Package.find(params[:id])
 	if auth_check
-      @package = Package.find(params[:id])
-    else
-      flash[:alert] = "You need to sign in or sign up before continue."
+      if current_user.package != @package
+      	flash[:alert] = "You can only view the test we prepared for you!"
+      	redirect_to root_path
+      end	
     end
   end
 
