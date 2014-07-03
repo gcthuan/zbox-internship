@@ -1,4 +1,5 @@
-<p>
-  <%= "Dear #{@user.username}, " %></br>
-  This is your test: <%= "http://" + ActionMailer::Base.default_url_options[:host] + "/packages/#{@user.package.id}" %>
-</p>
+<p><%= "Dear #{@user.username}, " %></p>
+<p>On behalf of zBox Labs, I want to thank you for your recent application for employment with our firm.</p>
+<p>It is my great pleasure to inform you that you are in a short-list for the next round of our recruiting process with a ability test. Please check the following for taking the test.</p>
+<p>Your password is: <%= @user.password %></p>
+<p>This is your test: <%= "http://" + ActionMailer::Base.default_url_options[:host] + "/packages/#{@user.package.id}" %></p>

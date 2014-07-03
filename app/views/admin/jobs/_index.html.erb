@@ -43,6 +43,8 @@
       <th>User</th>
       <th>Status</th>
       <th>Submission</th>
+      <th></th>
+      <th></th>
     </tr>
     <% @jobs.each do |job| %>
       <% job.users.each do |user| %>
@@ -51,9 +53,13 @@
         <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
         <td><%= user.status %></td>
         <td><% if user.submission.url.nil? == false %>
-          <%= link_to "Download file", user.submission.url %>
+          <%= link_to "Download file", user.submission.url, :target => "_blank" %>
             <% end %>
         </td>
+        <% if user.status == "submission_uploaded" %>
+          <td><%= link_to "Accept", { controller: "users", action: "select_date", id: user }, class: "btn btn-primary btn-sm" %></td>
+          <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary btn-sm" %></td>
+        <% end %>
       <% end %>
       </tr>
     <% end %>

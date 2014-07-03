@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:success] = "You have successfully submitted your answer. Please wait while we can take a look at it."
+      @user.update_attribute :status, "submission_uploaded"
       redirect_to :back
     else
       flash[:alert] = "Submission time is over!"
@@ -29,6 +30,6 @@ class UsersController < ApplicationController
 
   def user_params
     # NOTE: Using `strong_parameters` gem
-    params.required(:user).permit(:password, :password_confirmation, :job_name, :submission)
+    params.required(:user).permit(:password, :password_confirmation, :job_name, :submission, :appointment_date)
   end
 end

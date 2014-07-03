@@ -3,6 +3,7 @@ module Admin
 class Admin::UsersController < BaseController
   before_filter :authenticate_user!
   autocomplete :package, :name, :full => true
+
   def index
     @users = User.paginate(page: params[:page])
   end
@@ -16,19 +17,38 @@ class Admin::UsersController < BaseController
     @user = current_user
   end
 
-  def mail
+  def send_test
     @user = User.find(params[:id])
     @job = @user.job
     @questions = Question.tagged_with(@job.tag_list, :any => true)
-    @test = @questions.order_by_rand.limit(1).all
+    @easy = @questions.where(difficulty: "Easy").all.order_by_rand.limit(1).all
+    @medium = @questions.where(difficulty: "Medium").all.order_by_rand.limit(1).all
+    @hard = @questions.where(difficulty: "Hard").all.order_by_rand.limit(1).all
     @package = Package.create(:name => "#{@user.email} test")
-    @package.questions << @test
+    @package.questions << @easy << @medium <<@hard
     @package.user = @user
-    UserMailer.send_package(@user).deliver
     @user.update_attribute :status, "cv_accepted"
+    password = Devise.friendly_token.first(8)
+    @user.update_attribute :password, password
+    UserMailer.send_package(@user).deliver
     @user.update_attribute :deadline, Time.current + 5.minutes
     flash[:success] = "Successfully sent."
     redirect_to '/admin/users/index'
+  end
+
+  def select_date
+    $current_id = params[:id]
+    @user = User.find(params[:id])
+    @user.update_attribute :status, "submission_accepted"
+  end
+
+  def send_appointment
+    @user = User.find($current_id)
+    UserMailer.send_package(@user).deliver
+    @user.update_attribute :status, "appointment_sent"
+    puts params[:appointment_date]
+    flash[:success] = "Successfully sent."
+    redirect_to "/admin/jobs/index"
   end
 
   def add_package
@@ -54,26 +74,30 @@ class Admin::UsersController < BaseController
     end
   end
 
-  def update_password
-    @user = User.find(current_user.id)
-    if @user.update(user_params)
-      # Sign in the user by passing validation in case his password changed
-      sign_in @user, :bypass => true
-      redirect_to root_path
-    else
-      render "edit"
-    end
+  def update
+    @user = User.find($current_id)
+    #@user.update(user_params)
+    date = user_params
+    appointment_date = DateTime.new date["appointment_date(1i)"].to_i, date["appointment_date(2i)"].to_i,
+                                    date["appointment_date(3i)"].to_i, date["appointment_date(4i)"].to_i, 
+                                    date["appointment_date(5i)"].to_i
+
+    @user.update_attribute :appointment_date, appointment_date
+    puts @user.appointment_date
+    puts @user.appointment_date
+    puts @user.appointment_date
+    redirect_to action: "send_appointment"
   end
 
   def get_id
-    request.original_url.split(/\/(\d{1,})/).last
+    request.original_url.split(/\?id=(\d{1,})/).last
   end
 
   private
 
   def user_params
     # NOTE: Using `strong_parameters` gem
-    params.required(:user).permit(:password, :password_confirmation)
+    params.required(:user).permit(:password, :password_confirmation, :appointment_date)
   end
 
 end

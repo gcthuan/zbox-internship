@@ -1,4 +1,0 @@
-<p>
- <%= "Dear #{@user.username}, " %></br>
- submission_accepted
-</p>

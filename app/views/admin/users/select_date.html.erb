@@ -1,0 +1,10 @@
+<h1>Select an appointment date</h1>
+<%= form_for([:admin, @user] ) do |f| %>
+  <div>
+    <%= f.label :appointment_date %><br />
+    <%= f.datetime_select :appointment_date %>
+  </div>
+  <div class="action_container">
+    <%= f.submit "Send", class: "btn btn-medium btn-primary" %>
+  </div>
+<% end %>

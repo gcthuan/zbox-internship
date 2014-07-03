@@ -1,3 +1,4 @@
+<% provide(:title, 'All Users') %>
 <h1>All users</h1>
 
 <%= will_paginate %>
@@ -26,7 +27,7 @@
       <% end %>
     </td>
     <% if user.status == "Registered" %>
-      <td><%= link_to "Accept", { controller: "users", action: "mail", id: user }, class: "btn btn-primary btn-sm" %></td>
+      <td><%= link_to "Accept", { controller: "users", action: "send_test", id: user }, class: "btn btn-primary btn-sm" %></td>
       <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary btn-sm" %></td>
     <% else %>
       <td>CV accepted</td>

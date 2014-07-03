@@ -23,7 +23,9 @@ ZboxInternship::Application.routes.draw do
   match '/jobs/apply',   to: 'jobs#apply',  via: 'get'
 
   match '/admin/users/index', to: 'admin/users#index',  via: 'get'
-  match '/admin/users/mail', to: 'admin/users#mail',  via: 'get'
+  match '/admin/users/send_test', to: 'admin/users#send_test',  via: 'get'
+  match '/admin/users/select_date', to: 'admin/users#select_date',  via: 'get'
+  match '/admin/users/send_appointment', to: 'admin/users#send_appointment',  via: 'get'
   match '/admin/users/add_package', to: 'admin/users#add_package',    via: 'post'
   match '/admin/users/remove_package', to: 'admin/users#remove_package',    via: 'get'
   match '/admin/users/destroy', to: 'admin/users#destroy',  via: 'get'

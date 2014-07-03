@@ -72,7 +72,7 @@ class Admin::JobsController < BaseController
   private
 
     def job_params
-      params.require(:job).permit(:name, :description, :body, :deadline)
+      params.require(:job).permit(:name, :description, :body, :deadline, :tag_list)
     end
 
 end

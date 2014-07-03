@@ -9,11 +9,9 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+  <div><%= f.hidden_field :password, value: "11111111" %></div></br>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <div><%= f.hidden_field :password_confirmation, value: "11111111" %></div>
 
   <div class="field">
     <%= f.label :cv %>
