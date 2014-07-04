@@ -39,11 +39,11 @@ class Admin::UsersController < BaseController
   def select_date
     $current_id = params[:id]
     @user = User.find(params[:id])
-    @user.update_attribute :status, "submission_accepted"
   end
 
   def send_appointment
     @user = User.find($current_id)
+    @user.update_attribute :status, "submission_accepted"
     UserMailer.send_package(@user).deliver
     @user.update_attribute :status, "appointment_sent"
     puts params[:appointment_date]
