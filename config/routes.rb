@@ -1,6 +1,6 @@
 ZboxInternship::Application.routes.draw do
 
-  root 'static_pages#home'
+  root 'jobs#index'
 
   devise_for :users, :controllers => { :registrations => "my_devise/registrations" }
   
@@ -8,7 +8,7 @@ ZboxInternship::Application.routes.draw do
 
   match '/users/submit',  to: 'users#submit', via: 'post'
   match '/users/select',  to: 'users#select', via: 'get'
-  
+  match '/jobs/index',  to: 'jobs#index', via: 'get'
 
   match '/admin', to: 'admin/static_pages#home',  via: 'get'
   match '/admin/packages/index', to: 'admin/packages#index',  via: 'get'

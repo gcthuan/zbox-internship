@@ -54,3 +54,19 @@ textarea {
     color: #468847;
     text-align: left;
  }
+
+.flash.alert:empty {
+  display: none;
+}
+
+.flash.success.empty {
+  display: none;
+}
+
+.flash.notice:empty {
+  display: none;
+}
+
+.flash.error:empty {
+  display: none;
+}

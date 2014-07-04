@@ -5,9 +5,14 @@ class JobsController < ApplicationController
     $current_job_id = get_id
   end
 
+  def index
+    @jobs = Job.paginate(page: params[:page])
+  end
+
   def apply
-    if auth_check == false
-      flash[:alert] = "You are not signed in"
+    if user_signed_in? == false
+      flash[:alert] = "Please sign up or sign in to continue."
+      redirect_to new_user_registration_path
     else
       @user = User.find(current_user.id)
       @job = Job.find($current_job_id)
