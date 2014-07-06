@@ -27,8 +27,8 @@ class Admin::UsersController < BaseController
     @package = Package.create(:name => "#{@user.email} test")
     @package.questions << @easy << @medium <<@hard
     @package.user = @user
-    @user.update_attribute :status, "cv_accepted"
     password = Devise.friendly_token.first(8)
+    @user.update_attribute :status, "cv_accepted"
     @user.update_attribute :password, password
     UserMailer.send_package(@user).deliver
     @user.update_attribute :deadline, Time.current + 5.minutes
@@ -83,9 +83,6 @@ class Admin::UsersController < BaseController
                                     date["appointment_date(5i)"].to_i
 
     @user.update_attribute :appointment_date, appointment_date
-    puts @user.appointment_date
-    puts @user.appointment_date
-    puts @user.appointment_date
     redirect_to action: "send_appointment"
   end
 

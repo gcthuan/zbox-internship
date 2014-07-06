@@ -17,6 +17,7 @@ gem 'jquery-turbolinks'
 gem 'carrierwave'
 gem 'randumb'
 gem 'validates_timeliness', '~> 3.0'
+gem 'delayed_job_active_record'
 
 group :development, :test do
   gem 'spork-rails', '4.0.0'

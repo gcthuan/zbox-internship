@@ -11,12 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702095755) do
+ActiveRecord::Schema.define(version: 20140704083724) do
 
   create_table "cvs", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -76,12 +92,12 @@ ActiveRecord::Schema.define(version: 20140702095755) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                   default: "",           null: false
-    t.string   "encrypted_password",      default: "",           null: false
+    t.string   "email",                   default: "",                    null: false
+    t.string   "encrypted_password",      default: "",                    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",           default: 0,            null: false
+    t.integer  "sign_in_count",           default: 0,                     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -101,9 +117,9 @@ ActiveRecord::Schema.define(version: 20140702095755) do
     t.string   "job_name"
     t.integer  "job_id"
     t.integer  "package_id"
-    t.datetime "deadline"
-    t.string   "cv",                      default: "",           null: false
+    t.string   "cv",                      default: "",                    null: false
     t.datetime "appointment_date"
+    t.datetime "deadline",                default: '2014-07-04 08:38:12'
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
