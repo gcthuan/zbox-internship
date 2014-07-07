@@ -1,6 +1,7 @@
 class MyDevise::RegistrationsController < Devise::RegistrationsController
   def create 
 	 super
+   resource.create_activity :create, owner: resource
   end 
 
 =begin

@@ -4,7 +4,6 @@
   <li class="active"><a href="#details" data-toggle="tab">Job Details</a></li>
   <li><a href="#management" data-toggle="tab">Job Management</a></li>
   <li><a href="#activities" data-toggle="tab">Activities</a></li>
-  <li><a href="#settings" data-toggle="tab">Settings</a></li>
 </ul>
 
 <div class="tab-content">
@@ -36,34 +35,19 @@
         <% end %>
       </table>
   </div>
+
   <div class="tab-pane" id="activities">
     <table class="table table-hover">
-    <tr>
-      <th>Job</th>
-      <th>User</th>
-      <th>Status</th>
-      <th>Submission</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @jobs.each do |job| %>
-      <% job.users.each do |user| %>
-    <tr>
-        <td class="item"><%= link_to job.name, controller: "jobs", action: "show", id: job %></td>
-        <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
-        <td><%= user.status %></td>
-        <td><% if user.submission.url.nil? == false %>
-          <%= link_to "Download file", user.submission.url, :target => "_blank" %>
-            <% end %>
+    <% @activities = PublicActivity::Activity.order("created_at desc") %>
+    <% @activities.each do |activity| %>
+      </tr>
+        <td>
+          <%= link_to activity.owner.username, activity.owner if activity.owner %>
+          <%= render_activity activity %>
         </td>
-        <% if user.status == "submission_uploaded" %>
-          <td><%= link_to "Accept", { controller: "users", action: "select_date", id: user }, class: "btn btn-primary btn-sm" %></td>
-          <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary btn-sm" %></td>
-        <% end %>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
-      </table>
+    </table>
   </div>
 
   <div class="tab-pane" id="management">
@@ -84,7 +68,7 @@
             <th></th>
             <th></th>
           </tr>
-            <% job.users.each do |user| %>
+            <% job.users.order("created_at desc").each do |user| %>
           <tr>
             <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
             <td><%= user.status %></td>
@@ -114,8 +98,6 @@
 
   </div>
 
-
-  <div class="tab-pane" id="settings">settings</div>
 </div>
 
 

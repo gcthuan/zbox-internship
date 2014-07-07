@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       flash[:success] = "You have successfully submitted your answer. Please wait while we can take a look at it."
       @user.update_attribute :status, "submission_uploaded"
       @user.update_attribute :submission_updated_at, Time.current
+      @user.create_activity :update, owner: @user
       redirect_to :back
     else
       flash[:alert] = "Submission time is over!"

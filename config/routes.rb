@@ -30,6 +30,8 @@ ZboxInternship::Application.routes.draw do
   match '/admin/users/remove_package', to: 'admin/users#remove_package',    via: 'get'
   match '/admin/users/destroy', to: 'admin/users#destroy',  via: 'get'
 
+  resources :activities
+
   resources :users, except: [:index] do
     get :autocomplete_job_name, :on => :collection
   end

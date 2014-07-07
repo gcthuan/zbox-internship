@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include PublicActivity::Common
+
   belongs_to :job
   belongs_to :package
   validates :username, presence: true, length: { maximum: 50 }

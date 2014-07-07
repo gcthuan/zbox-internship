@@ -5,7 +5,7 @@ class Admin::UsersController < BaseController
   autocomplete :package, :name, :full => true
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page]).order("created_at desc")
   end
 
   def show
@@ -33,6 +33,7 @@ class Admin::UsersController < BaseController
     UserMailer.send_package(@user).deliver
     @user.update_attribute :deadline, Time.current + 5.minutes
     flash[:success] = "Successfully sent."
+    @user.create_activity :send_test, owner: current_user
     redirect_to '/admin/users/index'
   end
 
@@ -46,8 +47,8 @@ class Admin::UsersController < BaseController
     @user.update_attribute :status, "submission_accepted"
     UserMailer.send_package(@user).deliver
     @user.update_attribute :status, "appointment_sent"
-    puts params[:appointment_date]
     flash[:success] = "Successfully sent."
+    @user.create_activity :send_appointment, owner: current_user
     redirect_to "/admin/jobs/index"
   end
 
@@ -70,6 +71,7 @@ class Admin::UsersController < BaseController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
+        @user.create_activity :destroy, owner: current_user
         redirect_to '/admin/users/index', notice: "User deleted."
     end
   end

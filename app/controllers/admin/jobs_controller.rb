@@ -20,6 +20,7 @@ class Admin::JobsController < BaseController
     @job = Job.new(job_params)
     if @job.save
       flash[:success] = "You have successfully created a new package!"
+      @job.create_activity :create, owner: current_user
       redirect_to :action => 'index'
     else
       render 'new'
@@ -58,6 +59,7 @@ class Admin::JobsController < BaseController
     @job = Job.find(params[:id])
     if @job.update_attributes(job_params)
       flash[:success] = "The job has been successfully updated."
+      @job.create_activity :update, owner: current_user
       redirect_to '/admin/jobs/index'
     else
       render action: "edit"
