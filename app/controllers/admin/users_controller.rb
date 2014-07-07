@@ -28,10 +28,10 @@ class Admin::UsersController < BaseController
     @package.questions << @easy << @medium <<@hard
     @package.user = @user
     password = Devise.friendly_token.first(8)
-    @user.update_attribute :status, "cv_accepted"
     @user.update_attribute :password, password
     UserMailer.send_package(@user).deliver
     @user.update_attribute :deadline, Time.current + 5.minutes
+    @user.update_attribute :status, "cv_accepted"
     flash[:success] = "Successfully sent."
     @user.create_activity :send_test, owner: current_user
     redirect_to '/admin/users/index'
