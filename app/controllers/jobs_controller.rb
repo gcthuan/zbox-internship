@@ -19,7 +19,7 @@ class JobsController < ApplicationController
       if @user.job.nil?
         @job.users << @user
         flash[:success] = "You have successfully applied for this job. We will contact you as soon as we finish looking at your CV."
-        @user.update_attribute :status, "Applied"
+        @user.update_attribute :status, "applied"
         redirect_to root_path
       else
         flash[:error] = "You cannot apply for more than 1 job."

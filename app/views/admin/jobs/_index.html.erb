@@ -2,8 +2,8 @@
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#details" data-toggle="tab">Job Details</a></li>
-  <li><a href="#submission" data-toggle="tab">Submission</a></li>
-  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+  <li><a href="#management" data-toggle="tab">Job Management</a></li>
+  <li><a href="#activities" data-toggle="tab">Activities</a></li>
   <li><a href="#settings" data-toggle="tab">Settings</a></li>
 </ul>
 
@@ -36,7 +36,7 @@
         <% end %>
       </table>
   </div>
-  <div class="tab-pane" id="submission">
+  <div class="tab-pane" id="activities">
     <table class="table table-hover">
     <tr>
       <th>Job</th>
@@ -66,7 +66,7 @@
       </table>
   </div>
 
-  <div class="tab-pane" id="messages">
+  <div class="tab-pane" id="management">
     <ul class="nav nav-tabs">
     <% @jobs.each do |job| %>
       <li><a href="#job<%= job.id %>" data-toggle="tab"><%= job.name %></a></li>
@@ -77,25 +77,32 @@
       <div class="tab-pane" id="job<%= job.id %>">
         <table class="table table-hover">
           <tr>
-            <th>Job</th>
             <th>User</th>
             <th>Status</th>
+            <th>CV</th>
             <th>Submission</th>
             <th></th>
             <th></th>
           </tr>
             <% job.users.each do |user| %>
           <tr>
-            <td class="item"><%= link_to job.name, controller: "jobs", action: "show", id: job %></td>
             <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
             <td><%= user.status %></td>
-            <td><% if user.submission.url.nil? == false %>
-              <%= link_to "Download file", user.submission.url, :target => "_blank" %>
-                <% end %>
+            <td><%= link_to "Download CV", user.cv.url, :target => '_blank' %></td>
+            <td>
+              <% if user.submission.url.nil? == false %>
+                <%= link_to "Download file", user.submission.url, :target => "_blank" %>
+              <% end %>
             </td>
               <% if user.status == "submission_uploaded" %>
                 <td><%= link_to "Accept", { controller: "users", action: "select_date", id: user }, class: "btn btn-primary btn-sm" %></td>
                 <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary btn-sm" %></td>
+              <% elsif user.status == "applied" %>
+                <td><%= link_to "Accept", { controller: "users", action: "send_test", id: user }, class: "btn btn-primary btn-sm" %></td>
+                <td><%= link_to "Deny", { controller: "users", action: "destroy", id: user}, class: "btn btn-primary btn-sm" %></td>
+              <% else %>
+                <td></td>
+                <td></td>
               <% end %>
           </tr>
             <% end %>
