@@ -15,8 +15,6 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require autocomplete-rails
-//= require jquery.countdown
-//= require jquery.plugin
 //= require bootstrap
 //= require ckeditor/override
 //= require ckeditor/init

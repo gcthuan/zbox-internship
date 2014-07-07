@@ -10,7 +10,6 @@
  *
  *
  *= require jquery.ui.all
- *= require jquery.countdown
  *= require_self
  *= require_tree .
  */
