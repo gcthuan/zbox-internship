@@ -72,6 +72,7 @@ class Admin::UsersController < BaseController
     @user = User.find(params[:id])
     @user.create_activity :destroy, owner: current_user
     @user.update_attribute :status, "Denied"
+    redirect_to "/admin/jobs/index"
   end
 
   def update
