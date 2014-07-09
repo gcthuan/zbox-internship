@@ -30,11 +30,6 @@ ActiveRecord::Schema.define(version: 20140709022928) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
 
-  create_table "cvs", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -110,12 +105,12 @@ ActiveRecord::Schema.define(version: 20140709022928) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                   default: "",                    null: false
-    t.string   "encrypted_password",      default: "",                    null: false
+    t.string   "email",                  default: "",                    null: false
+    t.string   "encrypted_password",     default: "",                    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",           default: 0,                     null: false
+    t.integer  "sign_in_count",          default: 0,                     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -124,20 +119,16 @@ ActiveRecord::Schema.define(version: 20140709022928) do
     t.datetime "updated_at"
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "admin",                   default: false
+    t.boolean  "admin",                  default: false
     t.string   "username"
-    t.string   "status",                  default: "Registered"
-    t.string   "submission_file_name"
-    t.string   "submission_content_type"
-    t.integer  "submission_file_size"
-    t.datetime "submission_updated_at"
+    t.string   "status",                 default: "Registered"
     t.string   "submission"
     t.string   "job_name"
     t.integer  "job_id"
     t.integer  "package_id"
-    t.string   "cv",                      default: "",                    null: false
+    t.string   "cv",                     default: "",                    null: false
     t.datetime "appointment_date"
-    t.datetime "deadline",                default: '2014-07-04 08:38:12'
+    t.datetime "deadline",               default: '2014-07-09 04:40:19'
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
