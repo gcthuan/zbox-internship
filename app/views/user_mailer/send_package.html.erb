@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <% if @user.status == "cv_accepted" %>
+    <% if @user.status == "applied" %>
       <%= render 'cv_accepted' %>
     <% elsif @user.status == "submission_accepted" %>
       <%= render 'submission_accepted' %>
