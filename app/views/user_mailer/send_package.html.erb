@@ -6,14 +6,12 @@
   <body>
     <% if @user.status == "cv_accepted" %>
       <%= render 'cv_accepted' %>
-    <% elsif @user.status == "cv_denied" %>
-      <%= render 'cv_denied' %>
     <% elsif @user.status == "submission_accepted" %>
       <%= render 'submission_accepted' %>
-    <% elsif @user.status == "submission_denied" %>
-      <%= render 'submission_denied' %>
+    <% elsif @user.status == "denied" %>
+      <%= render 'denied' %>
     <% else %>
-
+      
     <% end %>
   </body>
 </html>
