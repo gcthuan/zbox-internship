@@ -71,9 +71,7 @@ class Admin::UsersController < BaseController
   def destroy
     @user = User.find(params[:id])
     @user.create_activity :destroy, owner: current_user
-    if @user.destroy
-        redirect_to root_path, notice: "User deleted."
-    end
+    @user.update_attribute :status, "Denied"
   end
 
   def update
