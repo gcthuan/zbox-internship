@@ -26,7 +26,7 @@ class Admin::UsersController < BaseController
     @hard = @questions.where(difficulty: "Hard").all.order_by_rand.limit(1).all
     @package = Package.create(:name => "#{@user.email} test")
     @package.questions << @easy << @medium << @hard
-    @package.url = request.host + "/packages/#{@package.id}"
+    @package.update_attribute :url, request.host + "/packages/#{@package.id}"
     @user.package = @package
     password = Devise.friendly_token.first(8)
     @user.update_attribute :password, password
