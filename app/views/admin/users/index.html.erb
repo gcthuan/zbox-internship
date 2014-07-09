@@ -8,6 +8,7 @@
   	<th>Id</th>
     <th>Name</th>
   	<th>Email</th>
+    <th>Job</th>
     <th>Joined Date</th>
     <th>Status</th>
     <th>CV</th>
@@ -19,6 +20,11 @@
   	<td><%= user.id %></td>
     <td><%= link_to user.username, controller: "users", action: "show", id: user %></td>
   	<td><%= link_to user.email, controller: "users", action: "show", id: user %></td>
+    <% if user.job.nil? == false %>
+      <td><%= link_to user.job.name, controller: "jobs", action: "show", id: user.job %></td>
+    <% else %>
+      <td>No job avaiable</td>
+    <% end %>
     <td><%= user.created_at %></td>
     <td><%= user.status %></td>
     <td>

@@ -1,7 +1,11 @@
 class MyDevise::RegistrationsController < Devise::RegistrationsController
   def create 
 	 super
-   resource.create_activity :create, owner: resource
+   if resource.valid?
+     resource.create_activity :create, owner: resource
+   else
+     flash[:alert] = "Email address has been taken!"
+   end
   end 
 
 =begin

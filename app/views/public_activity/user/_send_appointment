@@ -1,2 +1,2 @@
 sent appointment to <%= link_to activity.trackable.username, activity.trackable %> on <%= activity.trackable.appointment_date %> 
-															at <%= Time.current %>
+															at <%= activity.created_at %>

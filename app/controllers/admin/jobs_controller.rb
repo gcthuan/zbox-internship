@@ -19,7 +19,7 @@ class Admin::JobsController < BaseController
   def create
     @job = Job.new(job_params)
     if @job.save
-      flash[:success] = "You have successfully created a new package!"
+      flash[:success] = "You have successfully created a new job!"
       @job.create_activity :create, owner: current_user
       redirect_to :action => 'index'
     else

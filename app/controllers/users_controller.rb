@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       @user.update_attribute :status, "submission_uploaded"
       @user.update_attribute :submission_updated_at, Time.current
       @user.create_activity :update, owner: @user
+      @user.job.new_notification += 1
       redirect_to :back
     else
       flash[:alert] = "Submission time is over!"

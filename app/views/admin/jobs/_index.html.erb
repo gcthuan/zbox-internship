@@ -19,7 +19,11 @@
         <% @jobs.each do |job| %>
       <tr>
         <td><%= job.id %></td>
+        <% if job.new_notification == 0 %>
         <td class="item"><%= link_to job.name, controller: "jobs", action: "show", id: job %></td>
+        <% else %>
+        <td class="item"><span style="font-weight:bold"><%= link_to job.name, controller: "jobs", action: "show", id: job %></span></td>
+        <% end %> 
         <td class="item">
         <% if job.tags.any? %>
           <% job.tags.each do |tag| %>
@@ -58,6 +62,7 @@
     </ul>
     <div class="tab-content">
       <% @jobs.each do |job| %>
+      <% job.update_attribute :new_notification, 0 %>
       <div class="tab-pane" id="job<%= job.id %>">
         <table class="table table-hover">
           <tr>
