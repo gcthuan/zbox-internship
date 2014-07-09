@@ -25,15 +25,15 @@ class Admin::UsersController < BaseController
     @medium = @questions.where(difficulty: "Medium").all.order_by_rand.limit(1).all
     @hard = @questions.where(difficulty: "Hard").all.order_by_rand.limit(1).all
     @package = Package.create(:name => "#{@user.email} test")
-    @package.questions << @easy << @medium <<@hard
-    @package.user = @user
+    @package.questions << @easy << @medium << @hard
+    @user.package = @package
     password = Devise.friendly_token.first(8)
     @user.update_attribute :password, password
     UserMailer.send_package(@user).deliver
+    @user.create_activity :send_test, owner: current_user
     @user.update_attribute :deadline, Time.current + 5.minutes
     @user.update_attribute :status, "cv_accepted"
     flash[:success] = "Successfully sent."
-    @user.create_activity :send_test, owner: current_user
     redirect_to '/admin/users/index'
   end
 

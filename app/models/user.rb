@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include PublicActivity::Common
 
   belongs_to :job
-  belongs_to :package
+  has_one :package
   validates :username, presence: true, length: { maximum: 50 }
   validates :cv, presence: true
   validates_datetime :deadline, :on_or_after => Time.current, :if => :is_status?
