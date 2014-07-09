@@ -11,7 +11,7 @@ class JobsController < ApplicationController
 
   def apply
     if user_signed_in? == false
-      flash[:alert] = "Please sign up or sign in to continue."
+      flash[:alert] = "Please fill the required information below to apply."
       redirect_to new_user_registration_path
     else
       @user = User.find(current_user.id)

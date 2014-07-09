@@ -70,9 +70,9 @@ class Admin::UsersController < BaseController
 
   def destroy
     @user = User.find(params[:id])
+    @user.create_activity :destroy, owner: current_user
     if @user.destroy
-        @user.create_activity :destroy, owner: current_user
-        redirect_to '/admin/users/index', notice: "User deleted."
+        redirect_to root_path, notice: "User deleted."
     end
   end
 
