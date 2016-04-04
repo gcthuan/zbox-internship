@@ -2,6 +2,7 @@
 <% if current_user.try(:admin?) %>
   <%= link_to "Add job", "/jobs/new", class: "btn btn-medium btn-primary" %>
 <% end %>
+<p>You can login as gcthuan@apcs.vn (password: 11111111) to view admin interface</p>
 <h1>All jobs</h1>
 
 <%= render "index" %>
