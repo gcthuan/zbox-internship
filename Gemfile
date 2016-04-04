@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.2.3'
 
 gem 'rails', '~> 4.1.1'
 gem 'sprockets', '2.11.0'
@@ -36,7 +36,7 @@ group :test do
   gem 'launchy', '2.2.0'
 
   # Uncomment this line on OS X.
-  # gem 'growl', '1.0.3'
+  gem 'growl', '1.0.3'
 
   # Uncomment these lines on Linux.
   gem 'libnotify', '0.8.0'
